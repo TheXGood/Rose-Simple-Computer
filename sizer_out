@@ -1,0 +1,34 @@
+**** module/scope: processor
+     Flip-Flops   : 0
+     Logic Gates  : 32
+     ADDER[16]: 1 units
+**** module/scope: processor.IP
+     Flip-Flops   : 16
+     Logic Gates  : 35
+     MUX[2]: 16 slices
+     LOG[13]: 1 unaccounted
+     LOG[14]: 1 unaccounted
+**** module/scope: processor.alu
+     Flip-Flops   : 33
+     Logic Gates  : 258
+     ADDER[16]: 2 units
+     EQUALITY[16]: 2 units
+     MUX[2]: 17 slices
+     LPM[4]: 1 unaccounted
+     LPM[5]: 3 unaccounted
+     LPM[8]: 1 unaccounted
+     LPM[13]: 2 unaccounted
+     LOG[13]: 2 unaccounted
+     LOG[14]: 1 unaccounted
+**** TOTALS
+     Flip-Flops   : 49
+     Logic Gates  : 325
+     ADDER[16]: 3 units
+     EQUALITY[16]: 2 units
+     MUX[2]: 33 slices
+     LPM[4]: 1 unaccounted
+     LPM[5]: 3 unaccounted
+     LPM[8]: 1 unaccounted
+     LPM[13]: 2 unaccounted
+     LOG[13]: 3 unaccounted
+     LOG[14]: 2 unaccounted
