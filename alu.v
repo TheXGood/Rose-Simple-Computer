@@ -33,17 +33,17 @@ module ALU(op,A,B,Imm,Output,zero,clk,sign);
 			4'b0001:
 				Output = A - B - {{11{Imm[4]}},Imm};
 			4'b0010:
-				Output = A & (B | Imm);
+				Output = A & (B | {{11{1'b0}},Imm});
 			4'b0011:
-				Output = A | B | Imm;
+				Output = A | B | {{11{1'b0}},Imm};
 			4'b0100:
 				Output = A * (B+{{11{Imm[4]}},Imm});
 			4'b0101:
 				Output = A % B;
 			4'b0110:
-				Output = A ^ B;
+				Output = A ^ (B | {{11{1'b0}},Imm});
 			4'b0111:
-				Output = A \ B;
+				Output = A / B;
 			4'b1000:
 				begin
 				//Random value, more info in ALU_rand_tester.java

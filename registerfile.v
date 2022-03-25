@@ -27,7 +27,7 @@ module registerFile(clk, inaddr, in, addr1, addr2, out1, out2, write, clear);
 			vals[3'd7] <= 16'b0;
 		end
 		
-		if(write == 1'b1) vals[inaddr] = in;
+		if(write == 1'b1 && inaddr != 3'b00) vals[inaddr] = in;//Make sure Zero register is never changed
 		
 		//These are noblocking, since they should be concurrent
 		out1 <= vals[addr1];

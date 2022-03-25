@@ -14,21 +14,13 @@
 
 
 
-module ALU(ioaddr,data,clk);
+module IO(ioaddr,data,clk);
 	
 	input clk;
 	input ioaddr;
 	
-	reg ioaddr[];
 	wire clk;
 	
 	inout data;
-	
-	
-	
-	always @(posedge clk) begin
-		
-	end
-	
 	
 endmodule
