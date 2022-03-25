@@ -1,20 +1,26 @@
 `timescale 1ns / 1ps
 
-module ALU(op,A,B,Imm,Output,zero,clk);
+module ALU(op,A,B,Imm,Output,zero,clk,sign);
 	
-	input [2:0]op;
+	input [3:0]op;
 	input [15:0]A;
 	input [15:0]B;
+	input [4:0]Imm;
+	
 	
 	input clk;
 	
 	output [15:0]Output;
 	output zero;
+	output sign;
+	
 	
 	reg [15:0]Output;
 	reg zero;
 	
 	reg [15:0] RNG_out; //Stores the last number RNG outputted
+	reg sign;
+	
 	
 	
 	always @(posedge clk) begin
@@ -22,21 +28,23 @@ module ALU(op,A,B,Imm,Output,zero,clk);
 		
 		case(op)
 			
-			3'b000:
-				Output = A + B;
-			3'b001:
-				Output = A - B;
-			3'b010:
-				Output = A & B;
-			3'b011:
-				Output = A | B;
-			3'b100:
-				Output = A * B;
-			3'b101:
+			4'b0000:
+				Output = A + B + {{11{Imm[4]}},Imm};//Sign Extend
+			4'b0001:
+				Output = A - B - {{11{Imm[4]}},Imm};
+			4'b0010:
+				Output = A & (B | Imm);
+			4'b0011:
+				Output = A | B | Imm;
+			4'b0100:
+				Output = A * (B+{{11{Imm[4]}},Imm});
+			4'b0101:
 				Output = A % B;
-			3'b110:
+			4'b0110:
 				Output = A ^ B;
-			3'b111:
+			4'b0111:
+				Output = A \ B;
+			4'b1000:
 				begin
 				//Random value, more info in ALU_rand_tester.java
 				
@@ -60,13 +68,21 @@ module ALU(op,A,B,Imm,Output,zero,clk);
 				else Output <= RNG_out % A;
 				
 				end
-				
+			4'b1000: ;
+			
+			
 		endcase
 		
 		if(Output == 16'b0) begin
 			zero = 1;
 		end else begin
 			zero = 0;
+		end
+		
+		if(Output[16] == 1'b0) begin
+			sign = 0;
+		end else begin
+			sign = 1;
 		end
 		
 	end

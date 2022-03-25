@@ -7,7 +7,7 @@ module ALU_tb;
 	// inputs
 	reg[15:0] A;
 	reg[15:0] B;
-	reg[2:0] Op;
+	reg[3:0] Op;
 	reg clk;
 
 	// output
@@ -17,6 +17,7 @@ module ALU_tb;
 		.op(Op),
 		.A(A),
 		.B(B),
+		.Imm(-5),
 		.Output(Output),
 		.clk(clk)
 	);
@@ -36,9 +37,14 @@ module ALU_tb;
 		$dumpvars();
 
 		//inputs
-		A = 16'b1111000000000000;
+		A = 16'b0000000000100000;
 		Op = 3'b000;
-		B = 16'b1111000000000011;
+		B = 16'b0000000000000000;
+		
+		
+		
+		
+		#200
 		
 		A = 12;
 		Op = 3'b111;
