@@ -14,6 +14,17 @@ module registerFile(clk, inaddr, in, addr1, addr2, out1, out2, write, clear);
 	
 	reg [15:0]vals[7:0];
 	
+	initial begin
+		vals[3'd0] <= 16'b0;
+		vals[3'd1] <= 16'b0;
+		vals[3'd2] <= 16'b0;
+		vals[3'd3] <= 16'b0;
+		vals[3'd4] <= 16'b0;
+		vals[3'd5] <= 16'b0;
+		vals[3'd6] <= 16'b0;
+		vals[3'd7] <= 16'b0;
+	end
+	
 	always @(posedge clk) begin
 	
 		if(clear == 1'b1) begin

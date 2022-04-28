@@ -11,7 +11,7 @@ module toplevel();
 			#50
 			clk = ~clk;
 		end
-	end
+	end	
 	
 	initial begin
 	
@@ -19,7 +19,7 @@ module toplevel();
 		$dumpvars();
 
 	
-		#200
+		#4000
 		
 		$finish();
 	end

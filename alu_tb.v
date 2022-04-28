@@ -17,7 +17,7 @@ module ALU_tb;
 		.op(Op),
 		.A(A),
 		.B(B),
-		.Imm(-5),
+		.Imm(16),
 		.Output(Output),
 		.clk(clk)
 	);
@@ -37,12 +37,12 @@ module ALU_tb;
 		$dumpvars();
 
 		//inputs
-		A = 16'b0000000000100000;
-		Op = 3'b000;
+		A = 16'b0000000000000000;
+		Op = 4'b000;
 		B = 16'b0000000000000000;
 		
-		
-		
+		#5
+		$display("Adding gives %d",Output);
 		
 		#200
 		
@@ -53,10 +53,10 @@ module ALU_tb;
 		//Wait a while to generate multiple numbers to view in the waveform
 		#500
 		
-		$display("RNG unclamped = %d",Output);
-		A = Output;
-		Op = 3'b101;
-		B = 255;
+		//$display("RNG unclamped = %d",Output);
+		//A = Output;
+		//Op = 3'b101;
+		//B = 255;
 		#100
 		
 		$display("RNG clamped = %d",Output);

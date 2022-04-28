@@ -13,14 +13,14 @@
 //First half of address use port 1, second half are port 2
 
 
+//One concern about this IO system, is I'm not sure how it will need to be catered to the FPGA design, will be left as a shell.
 
-module IO(ioaddr,data,clk);
+
+module IO(clk,ioaddr,data);
 	
 	input clk;
-	input ioaddr;
-	
+	input [15:0]ioaddr;
 	wire clk;
-	
-	inout data;
+	inout [15:0]data;
 	
 endmodule

@@ -1,0 +1,71 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\PFs\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\PFs\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\PFs\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\PFs\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\PFs\iverilog\lib\ivl\va_math.vpi";
+:vpi_module "C:\PFs\iverilog\lib\ivl\v2009.vpi";
+S_000002402122a440 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_00000240214051b0 .scope module, "memory" "memory" 3 6;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 16 "addr1";
+    .port_info 2 /INPUT 16 "addr2";
+    .port_info 3 /OUTPUT 16 "word1";
+    .port_info 4 /OUTPUT 16 "word2";
+o0000024021416fd8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v000002402122a5d0_0 .net "addr1", 15 0, o0000024021416fd8;  0 drivers
+o0000024021417008 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v00000240213e2910_0 .net "addr2", 15 0, o0000024021417008;  0 drivers
+v000002402122bd70 .array "block_memory", 0 15, 15 0;
+o0000024021417038 .functor BUFZ 1, C4<z>; HiZ drive
+v0000024021405340_0 .net "clk", 0 0, o0000024021417038;  0 drivers
+v00000240214053e0_0 .var/i "i", 31 0;
+v00000240214137f0_0 .var "word1", 15 0;
+v0000024021413890_0 .var "word2", 15 0;
+E_000002402122af60 .event anyedge, v0000024021405340_0;
+    .scope S_00000240214051b0;
+T_0 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v00000240214053e0_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v00000240214053e0_0;
+    %cmpi/s 65536, 0, 32;
+    %jmp/0xz T_0.1, 5;
+    %pushi/vec4 0, 0, 16;
+    %ix/getv/s 4, v00000240214053e0_0;
+    %store/vec4a v000002402122bd70, 4, 0;
+    %load/vec4 v00000240214053e0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v00000240214053e0_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
+    %vpi_call/w 3 25 "$readmemb", "bram.hex", v000002402122bd70, 32'sb00000000000000000000000000000000, 32'sb00000000000000000000000000000011 {0 0 0};
+    %vpi_call/w 3 27 "$display", "block_memory[0] == %d", &A<v000002402122bd70, 0> {0 0 0};
+    %vpi_call/w 3 28 "$display", "block_memory[1] == %d", &A<v000002402122bd70, 1> {0 0 0};
+    %vpi_call/w 3 29 "$display", "block_memory[2] == %d", &A<v000002402122bd70, 2> {0 0 0};
+    %vpi_call/w 3 30 "$display", "block_memory[3] == %d", &A<v000002402122bd70, 3> {0 0 0};
+    %vpi_call/w 3 31 "$display", "block_memory[15] == %d", &A<v000002402122bd70, 15> {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_00000240214051b0;
+T_1 ;
+    %wait E_000002402122af60;
+    %ix/getv 4, v000002402122a5d0_0;
+    %load/vec4a v000002402122bd70, 4;
+    %store/vec4 v00000240214137f0_0, 0, 16;
+    %ix/getv 4, v00000240213e2910_0;
+    %load/vec4a v000002402122bd70, 4;
+    %store/vec4 v0000024021413890_0, 0, 16;
+    %jmp T_1;
+    .thread T_1, $push;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "memory.v";
